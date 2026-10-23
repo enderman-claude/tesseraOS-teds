@@ -36,7 +36,10 @@ void teds_disconnect(teds_conn *c);
 int teds_surface_create(teds_conn *c, uint32_t w, uint32_t h, int32_t x, int32_t y,
                         teds_surface **out);
 uint32_t *teds_surface_pixels(teds_surface *s);
+uint32_t teds_surface_id(const teds_surface *s);
 int teds_surface_commit(teds_surface *s, uint32_t x, uint32_t y, uint32_t w, uint32_t h);
+/* Destroying removes the surface from the server. teds_disconnect frees any surfaces still
+ * open, so their handles must not be used after it. */
 int teds_surface_destroy(teds_surface *s);
 
 /* Direct mode. Requires TEDS_CAP_DIRECT at connect time. */

@@ -63,7 +63,17 @@ framebuffer reports its own format, and direct-mode clients must check it before
 | Protocol and client API | Implemented; host-tested over loopback |
 | Server dispatch, surfaces, compositing | Implemented; host-tested |
 | Direct mode grant and release | Implemented; host-tested |
-| Capability checks | Flags on the connection; not yet tessera capabilities |
-| Framebuffer | Host memory only; tessera GOP path is a stub |
+| Disconnect cleanup (surfaces, direct mode) | Implemented; host-tested, ASan and UBSan clean |
+| Capability checks | Flags from the attach-time allowed set; not yet tessera capabilities |
+| Framebuffer | Host memory only; tessera GOP path is a stub (`src/tessera/`) |
 | IPC transport | Loopback for host tests; tessera endpoint transport is a stub |
 | Input | Stub (not implemented) |
+
+## Client API notes
+
+- `teds_connect` sends HELLO with the requested capability bits. The server grants the
+  intersection with the allowed set it was attached with.
+- `teds_disconnect` sends GOODBYE. The server releases direct mode and removes the client's
+  surfaces. The client frees surfaces it still holds, so their handles are invalid after it.
+- Calls are synchronous. The loopback transport runs the server from `kick`. A real transport
+  leaves `kick` empty because teds is its own task.

@@ -24,9 +24,11 @@ typedef struct teds_server teds_server;
 int teds_server_init(teds_server **out, const teds_fb *fb);
 void teds_server_free(teds_server *s);
 
-/* Attach a client by its server-side transport. Returns a client slot, or a negative
- * status. Each attached transport is served by teds_server_poll. */
-int teds_server_attach(teds_server *s, const teds_transport *t, uint32_t *client_slot_out);
+/* Attach a client by its server-side transport. allowed_caps comes from the service manifest
+ * and is the most the client may ever be granted. Returns 0 and fills client_slot_out, or a
+ * negative status. Each attached transport is served by teds_server_poll. */
+int teds_server_attach(teds_server *s, const teds_transport *t, uint32_t allowed_caps,
+                       uint32_t *client_slot_out);
 void teds_server_detach(teds_server *s, uint32_t client_slot);
 
 /* Handle every pending request, then composite if anything changed. Returns the number of

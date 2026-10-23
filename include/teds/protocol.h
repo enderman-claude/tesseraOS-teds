@@ -17,6 +17,7 @@ enum teds_op {
     TEDS_OP_DIRECT_REQUEST = 6,
     TEDS_OP_DIRECT_RELEASE = 7,
     TEDS_OP_REPLY = 8,
+    TEDS_OP_GOODBYE = 9,         /* client disconnect: teds releases everything it held */
 };
 
 /* Capability bits, sent in HELLO and granted in HELLO_REPLY. */

@@ -8,8 +8,9 @@ The Ender display server for tesseraOS. Apps reach the screen in one of two ways
   the framebuffer, for OSD, fullscreen and other uses that need it.
 
 See [docs/DESIGN.md](docs/DESIGN.md) for the protocol, capabilities and status.
-`include/teds/` holds the protocol and the client and server APIs. The sources are not
-written yet, so this repo does not build.
+`include/teds/` holds the protocol and the client and server APIs. `make test` builds the
+library and runs the host tests over an in-process loopback transport. The tessera IPC
+transport and framebuffer are stubs that return `TEDS_ERR_UNSUPPORTED`.
 
 ## Related repos
 
