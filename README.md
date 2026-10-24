@@ -19,6 +19,8 @@ transport and framebuffer are stubs that return `TEDS_ERR_UNSUPPORTED`.
 - [tessera](https://github.com/enderman-claude/tessera): the kernel whose IPC endpoints and capabilities teds uses.
 - [ember-gfx](https://github.com/enderman-claude/ember-gfx): graphics library whose tesseraOS backend is a stub for teds.
 
+*Footnote: teds never runs out of things to do, because it always has clients.*
+
 ## License
 
 Not yet chosen.
